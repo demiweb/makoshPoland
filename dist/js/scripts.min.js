@@ -62,6 +62,54 @@ $(window).scroll(function (e) {
 
 });
 
+var burger = [...document.querySelectorAll('.burger')];
+var header = document.querySelector('.header');
+// var backdrop = document.querySelector('.backdrop');
+
+const horizontalParallax = document.querySelectorAll('.rellax-v');
+
+
+var rellax = new Rellax('.rellax-h', {});
+$('.rellax-v').paroller();
+
+
+function randomNumber(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function changeColored(rec) {
+    var n1 = randomNumber(0, 8);
+    var n2 = randomNumber(0, 8);
+    var n3 = randomNumber(0, 8);
+    rec.forEach((btn, k) => {
+        btn.classList.remove('gr');
+    })
+    rec.forEach((btn2, l) => {
+        if (l === n1 || l === n2 || l === n3) {
+            btn2.classList.add('gr');
+        }
+    })
+}
+
+function burgerControl() {
+    if (burger.length) {
+        burger.forEach((btn) => {
+
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
+                header.classList.toggle('active');
+                // backdrop.classList.toggle('active');
+                document.body.classList.toggle('no-scroll')
+
+            })
+        })
+    }
+}
+
+burgerControl();
+
 //add counting number to show delay speed
 var counterContainer = [...document.querySelectorAll('.counting-delay')];
 
@@ -147,66 +195,6 @@ marqqueFnc();
 
 var controller = new ScrollMagic.Controller();
 
-function startAnimationGulp() {
-    if (window.innerWidth > 800) {
-        var scene2 = new ScrollMagic.Scene({triggerElement: ".showreels-cont .trg-1", duration: '60%'})
-            // animate color and top border in relation to scroll position
-            .setTween(".showreel-video", {
-                width: '93%',
-                height: '115vh',
-                ease: Linear.linear,
-            }) // the tween durtion can be omitted and defaults to 1
-            // .addIndicators({name: "2 (duration: 300)"}) // add indicators (requires plugin)
-            .addTo(controller);
-
-
-        var scene3 = new ScrollMagic.Scene({triggerElement: ".showreels-cont .trg-2", duration: '70%'})
-            // animate color and top border in relation to scroll position
-            .setClassToggle(".btn-play", "hide") // add class toggle.addIndicators({name: "2 (duration: 300)"}) // add indicators (requires plugin)
-            // the tween durtion can be omitted and defaults to 1
-            // .addIndicators({name: "3 (duration: 300)"}) // add indicators (requires plugin)
-            .addTo(controller);
-    } else {
-        var scene2 = new ScrollMagic.Scene({triggerElement: ".showreels-cont .trg-1", duration: '50%', offset: -150})
-            // animate color and top border in relation to scroll position
-            .setTween(".showreel-video", {
-                width: '85%',
-                marginLeft: '15%',
-                ease: Linear.linear,
-            }) // the tween durtion can be omitted and defaults to 1
-            // .addIndicators({name: "2 (duration: 300)"}) // add indicators (requires plugin)
-            .addTo(controller);
-        var scene3 = new ScrollMagic.Scene({triggerElement: ".showreels-cont .trg-2", duration: '70%'})
-            // animate color and top border in relation to scroll position
-            .setClassToggle(".btn-play", "hide") // add class toggle.addIndicators({name: "2 (duration: 300)"}) // add indicators (requires plugin)
-            // the tween durtion can be omitted and defaults to 1
-            // .addIndicators({name: "3 (duration: 300)"}) // add indicators (requires plugin)
-            .addTo(controller);
-    }
-}
-
-startAnimationGulp()
-
-var scene = new ScrollMagic.Scene({triggerElement: ".about-company .trigger-b", duration: '30%', offset: -150})
-    // animate color and top border in relation to scroll position
-    .setTween(".ab-bg", {
-        right: "1.3vw",
-        left: "1.3vw",
-        borderRadius: "25px",
-        ease: Linear.easeNone,
-    }) // the tween durtion can be omitted and defaults to 1
-    // .addIndicators({name: "2 (duration: 300)"}) // add indicators (requires plugin)
-    .addTo(controller);
-
-var scene4 = new ScrollMagic.Scene({triggerElement: ".banner .trg", duration: '27%', offset: -40})
-    // animate color and top border in relation to scroll position
-    .setTween(".banner-cont", {
-        maxWidth: '100%',
-        ease: Linear.easeNone,
-    }) // the tween durtion can be omitted and defaults to 1
-    // .addIndicators({name: "2 (duration: 300)"}) // add indicators (requires plugin)
-    .addTo(controller);
-
 
 let footerH = document.querySelector('.footer').offsetHeight;
 document.querySelector('.footer-trigger').style.bottom = `${footerH}px`;
@@ -268,20 +256,42 @@ window.addEventListener('mousemove', function (e) {
     box.style.left = e.clientX + "px";
     box.style.top = e.clientY + "px";
 });
-window.addEventListener('drag', function (e) {
+window.addEventListener('focus', function (e) {
     console.log('vbt');
     var pos = e.pageX;
     box.style.left = e.clientX + "px";
     box.style.top = e.clientY + "px";
 });
+window.addEventListener('mousedown', function (e) {
+    console.log('vbt');
+    var pos = e.pageX;
+    box.style.left = e.clientX + "px";
+    box.style.top = e.clientY + "px";
+});
+window.addEventListener('pointerup', function (e) {
+    console.log('vbt');
+    var pos = e.pageX;
+    box.style.left = e.clientX + "px";
+    box.style.top = e.clientY + "px";
+});
+
 window.addEventListener('mouseover', (e) => {
     if (e.target.closest('.cursor-js')) {
         box.classList.add('go-cur');
         var cur = e.target.closest('.cursor-js').dataset.cursor;
         box.querySelector('.cursor-text').innerHTML = cur;
-    }
+        if (e.target.closest('.single-product-slide .types')) {
+            box.classList.remove('go-cur');
+            box.querySelector('.cursor-text').innerHTML = '';
+        }
 
+        if (e.target.closest('.single-product-slide .bot')) {
+            box.classList.remove('go-cur');
+            box.querySelector('.cursor-text').innerHTML = '';
+        }
+    }
 });
+
 window.addEventListener('mouseout', (e) => {
 
     // console.log('out')
@@ -310,6 +320,44 @@ function controlFaqs() {
 
 controlFaqs();
 //close-open faq
+
+//open close vac
+
+let vacBtn = [...document.querySelectorAll('.open-vac')];
+
+function controlVac() {
+    if (vacBtn.length) {
+        let sgCar = [...document.querySelectorAll('.single-carrier')];
+        sgCar.forEach((car) => {
+            let pos = car.querySelector('.head > span').innerHTML;
+            let inpPos = car.querySelector('.form .position input');
+            inpPos.value = pos;
+        });
+        vacBtn.forEach((btn) => {
+            let hide = btn.dataset.hide;
+            let show = btn.dataset.show;
+            let pes = [...btn.querySelectorAll('p span')];
+            btn.addEventListener('click', () => {
+                btn.closest('.single-carrier').classList.toggle('open');
+                if (btn.closest('.single-carrier').classList.contains('open')) {
+
+                    pes.forEach((pe) => {
+                        pe.innerHTML = hide;
+                    })
+                } else {
+                    pes.forEach((pe) => {
+                        pe.innerHTML = show;
+                    })
+                }
+            });
+
+        })
+    }
+}
+
+controlVac();
+
+//open close vac
 
 
 
