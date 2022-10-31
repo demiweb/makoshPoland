@@ -59,6 +59,75 @@
   align-items: center;
   justify-content: flex-start;
 
+  .lang {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-right: 20px;
+    cursor: pointer;
+    padding: 6px;
+
+    img {
+      height: 18px;
+      width: auto;
+      margin-right: 6px;
+
+
+    }
+
+    span {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+      text-align: center;
+      text-transform: uppercase;
+      color: #000000;
+    }
+
+    ul {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: #fff;
+      border: 1px solid #000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+
+      li {
+        a {
+          padding: 6px 20px;
+          text-align: center;
+          display: flex;
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 1.2;
+          color: #000;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+        }
+
+        &.active, &:hover {
+          a {
+            background: #FF5112;
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      ul {
+        opacity: 1;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+
+      }
+    }
+  }
+
   .cart {
     width: 35px;
     height: 35px;
@@ -96,6 +165,13 @@
   .location {
     position: relative;
 
+    &:hover {
+      .location-select {
+        opacity: 1;
+        transition: opacity 0.3s ease;
+        pointer-events: auto;
+      }
+    }
 
     .pos {
       display: flex;
@@ -103,6 +179,7 @@
       justify-content: center;
       margin-right: 32px;
       cursor: pointer;
+
 
       p {
         font-style: normal;
@@ -122,6 +199,78 @@
         img {
           width: 100%;
           height: 100%;
+        }
+      }
+    }
+  }
+}
+
+.location-select {
+  position: absolute;
+  top: 100%;
+  border: 1px solid #000;
+  right: 0;
+
+
+  max-height: 320px;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+
+  ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    li {
+      position: relative;
+      width: 100%;
+
+      a {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        color: #fff;
+        font-size: 18px;
+        line-height: 1.2;
+        font-weight: 500;
+        background: #FF5112;
+        padding: 5px 20px;
+
+
+        &::before {
+          width: 0;
+          height: 30px;
+          margin-right: 0;
+          display: inline-block;
+          content: '';
+          background: url("../img/arr-black.svg") no-repeat center / 100%;
+          transition: width 0.15s linear, margin 0.15s ease;
+        }
+      }
+
+      &.active {
+        a {
+          color: #000;
+          background: #fff;
+        }
+
+        a::before {
+          width: 30px;
+          margin-right: 15px;
+        }
+
+
+      }
+
+      &:hover {
+        a {
+          background: #fff;
+          color: #000;
         }
       }
     }
@@ -2072,6 +2221,8 @@ body.home {
       bottom: 0;
       background: rgba(18, 18, 18, 0.18);
       z-index: 2;
+      border-top-left-radius: 35px;
+      border-bottom-left-radius: 35px;
     }
 
     video, iframe {
@@ -2659,6 +2810,7 @@ body.home {
       right: 0;
       bottom: 0;
       z-index: 2;
+      border-radius: 35px;
       background: linear-gradient(0deg, rgba(13, 26, 60, 0.2), rgba(13, 26, 60, 0.2));
 
     }
@@ -4071,6 +4223,17 @@ main {
   width: 100%;
   display: block;
 
+  iframe, video {
+    width: 100%;
+    height: 720px;
+    border-radius: 35px;
+    margin: 35px 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
   p, li, a {
     font-style: normal;
     font-weight: 300;
@@ -4572,8 +4735,12 @@ main {
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-    line-height: 60px;
+    line-height: 1;
     color: #000000;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .quantity__button button {
@@ -5826,7 +5993,7 @@ input[type=number] {
   }
 }
 
-.video-modal {
+.video-modal, .quick-mod, .form-modal, .call-mod {
   padding: 20px;
 
   .close-modal {
@@ -5865,7 +6032,64 @@ input[type=number] {
   }
 }
 
+.quick-mod, .call-mod {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-cont {
+  background: #fff;
+  padding: 50px 40px;
+  position: relative;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  max-height: calc(100vh - 60px);
+  max-width: 680px;
+  z-index: 2;
+  width: 100%;
+  border-radius: 35px;
+  overflow-y: auto;
+
+  .form {
+    padding: 0;
+    background: rgba(255, 255, 255, 0);
+    border: none;
+    margin-top: 30px;
+
+  }
+
+  > span {
+    font-size: 52px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+    color: #000;
+  }
+
+  .close-modal {
+    width: 40px;
+    height: 40px;
+    top: 13px;
+    right: 13px;
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
 @media screen and (max-width: 1650px) {
+  .article-cont {
+
+
+    iframe, video {
+      height: 590px;
+    }
+  }
   .choice-lines .hor .line:nth-child(2) {
     bottom: 27.05%;
   }
@@ -6186,6 +6410,13 @@ input[type=number] {
 }
 
 @media screen and (max-width: 1450px) {
+  .article-cont {
+
+
+    iframe, video {
+      height: 520px;
+    }
+  }
   .main-product {
     padding-bottom: 90px;
   }
@@ -6456,6 +6687,13 @@ input[type=number] {
 }
 
 @media screen and (max-width: 1280px) {
+  .article-cont {
+
+
+    iframe, video {
+      height: 450px;
+    }
+  }
   .about-hero .btn-play p {
     display: none;
   }
@@ -7072,6 +7310,58 @@ input[type=number] {
     height: 25px;
     margin-right: 5px;
   }
+  .location-select ul li a {
+    font-size: 16px;
+    padding: 3px 10px;
+
+    &::before {
+      height: 22px;
+      margin-right: 8px;
+    }
+  }
+  .location-select ul li.active a::before {
+    width: 22px;
+    margin-right: 8px;
+  }
+  .cont-menu .lang ul li a {
+    padding: 4px 13px;
+    font-size: 14px;
+  }
+  .cont-menu .lang span {
+    font-size: 14px;
+  }
+  .cont-menu .lang img {
+    height: 15px;
+  }
+  .location {
+    &:hover {
+      .location-select {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+  }
+  .location .pos.vis {
+    ~ .location-select {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+  }
+  .lang:hover {
+    ul {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+  }
+  .cont-menu .lang span {
+    display: none;
+  }
+  .lang img.vis {
+    ~ ul {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+  }
   .cont-menu .location .pos p {
     font-size: 14px;
     line-height: 1.1;
@@ -7113,6 +7403,13 @@ input[type=number] {
 }
 
 @media screen and (max-width: 922px) {
+  .article-cont {
+
+
+    iframe, video {
+      height: 360px;
+    }
+  }
   .choice-cont .text {
     padding-left: 15px;
     padding-right: 15px;
@@ -7485,6 +7782,22 @@ input[type=number] {
 }
 
 @media screen and (max-width: 700px) {
+  .modal-cont {
+    padding: 30px 20px;
+    border-radius: 15px;
+
+    .close-modal {
+      top: 7px;
+      right: 7px;
+      width: 30px;
+      height: 30px;
+    }
+  }
+  .modal-cont > span {
+    font-size: 32px;
+    line-height: 1.2;
+    font-weight: 700;
+  }
   .about-text__lines span::after {
     margin-left: 25px;
   }
@@ -7960,6 +8273,17 @@ input[type=number] {
 }
 
 @media screen and (max-width: 600px) {
+  .cont-menu .lang {
+    margin-right: 5px;
+  }
+  .article-cont {
+
+
+    iframe, video {
+      height: 250px;
+      border-radius: 15px;
+    }
+  }
 
   .about-company-step:nth-child(1) {
     padding-top: 24%;
@@ -8478,11 +8802,15 @@ main {
   right: 0;
   width: 100%;
   height: 100%;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   transition: width 0.6s ease, height 0.6s ease;
+
+  &.start {
+    display: flex;
+  }
 
   &::before {
     border: 10px solid #FF5112;
@@ -8631,6 +8959,7 @@ main {
     height: 30px;
     pointer-events: none;
   }
+
   &.rem {
     z-index: -1;
   }

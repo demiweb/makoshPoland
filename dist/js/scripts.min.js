@@ -101,12 +101,28 @@ function preloadStar() {
         }, 2700);
         setTimeout(() => {
             document.querySelector('main').classList.add('visible');
+            preloader.style.display = "none"
             preloader.classList.add('rem');
         }, 3100);
     }
 }
 
-preloadStar();
+window.addEventListener('load', () => {
+    if (document.body.classList.contains('home')) {
+        preloader.classList.add('start');
+        preloadStar();
+    } else {
+        preloader.classList.add('rem');
+        document.querySelector('main').classList.add('visible');
+    }
+});
+$(".go-down").click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $(".carriers-list").offset().top - 250
+    }, 450);
+});
 
 //preload
 
@@ -395,10 +411,65 @@ function marqqueFnc() {
 marqqueFnc();
 
 
+//loc lang
+let locPos = document.querySelector('.location .pos');
+let langIm = document.querySelector('.lang img');
+
+function locPosControl() {
+    if (locPos) {
+        locPos.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            locPos.classList.toggle('vis');
+        })
+    }
+}
+
+locPosControl();
+
+function langImControl() {
+    if (langIm) {
+        langIm.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            langIm.classList.toggle('vis');
+        })
+    }
+}
+
+langImControl();
+
+$('body').on('click', function (e) {
+    if (e.target.closest('.pos')) {
+
+
+        langIm.classList.remove('vis');
+
+    } else {
+        locPos.classList.remove('vis');
+
+        if (e.target.closest('.lang img')) {
+
+        } else {
+            langIm.classList.remove('vis');
+        }
+    }
+
+});
+
+
+//loc lang
+
 //modals
 
 let goCart = [...document.querySelectorAll('.go-cart')];
+let goQuick = [...document.querySelectorAll('.go-quick')];
+let goCall = [...document.querySelectorAll('.go-mod')];
 let cartMod = [...document.querySelectorAll('.cart-mod')][0];
+let callMod = [...document.querySelectorAll('.call-mod')][0];
+let quickMod = [...document.querySelectorAll('.quick-mod')][0];
 let backplate = [...document.querySelectorAll('.backplate')];
 let closeModal = [...document.querySelectorAll('.close-modal')];
 
@@ -410,6 +481,34 @@ function controlCart() {
                 e.stopPropagation();
 
                 cartMod.classList.add('visible');
+                document.body.classList.add('no-scroll');
+            })
+        })
+    }
+}
+
+function controlQuick() {
+    if (goQuick.length) {
+        goQuick.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                quickMod.classList.add('visible');
+                document.body.classList.add('no-scroll');
+            })
+        })
+    }
+}
+
+function controlCall() {
+    if (goCall.length) {
+        goCall.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                callMod.classList.add('visible');
                 document.body.classList.add('no-scroll');
             })
         })
@@ -437,6 +536,8 @@ function modalsControl() {
 
 modalsControl();
 controlCart();
+controlQuick();
+controlCall();
 
 
 let thanksPage = [...document.querySelectorAll('.thanks-hero')];
@@ -542,19 +643,19 @@ window.addEventListener('mousemove', function (e) {
     box.style.top = e.clientY + "px";
 });
 window.addEventListener('focus', function (e) {
-    console.log('vbt');
+    // console.log('vbt');
     var pos = e.pageX;
     box.style.left = e.clientX + "px";
     box.style.top = e.clientY + "px";
 });
 window.addEventListener('mousedown', function (e) {
-    console.log('vbt');
+    // console.log('vbt');
     var pos = e.pageX;
     box.style.left = e.clientX + "px";
     box.style.top = e.clientY + "px";
 });
 window.addEventListener('pointerup', function (e) {
-    console.log('vbt');
+    // console.log('vbt');
     var pos = e.pageX;
     box.style.left = e.clientX + "px";
     box.style.top = e.clientY + "px";
