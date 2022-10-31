@@ -8473,6 +8473,20 @@ input[type=number] {
       height: auto; } }
 
 @media screen and (max-width: 600px) {
+  .burger {
+    -webkit-transform: scale(0.6);
+        -ms-transform: scale(0.6);
+            transform: scale(0.6);
+    margin-right: -12px;
+    margin-left: 1px; }
+  .preloader .hero-img {
+    width: 100%;
+    padding: 20px; }
+  .preloader .log {
+    height: 40px;
+    position: absolute;
+    top: 79px;
+    left: 42px; }
   .cont-menu .lang {
     margin-right: 5px; }
   .article-cont iframe, .article-cont video {

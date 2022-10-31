@@ -8273,6 +8273,22 @@ input[type=number] {
 }
 
 @media screen and (max-width: 600px) {
+  .burger {
+    transform: scale(0.6);
+    margin-right: -12px;
+    margin-left: 1px;
+  }
+  .preloader .hero-img {
+    width: 100%;
+    padding: 20px;
+  }
+  .preloader .log {
+    height: 40px;
+    position: absolute;
+    top: 79px;
+    left: 42px;
+  }
+
   .cont-menu .lang {
     margin-right: 5px;
   }
