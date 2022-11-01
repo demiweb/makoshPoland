@@ -729,14 +729,55 @@ body.home {
     line-height: 60px;
     color: #000000;
     width: 100%;
-    padding-bottom: 25px;
-    margin-bottom: 25px;
-    border-bottom: 1px solid #434343;
+
 
     strong {
       margin-right: 25px;
       font-weight: 700;
     }
+  }
+}
+
+.tab-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #434343;
+  gap: 25px;
+}
+
+.tab-btn {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 60px;
+  color: #000000;
+  cursor: pointer;
+
+  &.active {
+    font-weight: 700;
+  }
+}
+
+.tab-cont {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.item-tab {
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  &.active {
+    display: flex;
   }
 }
 
@@ -7782,6 +7823,15 @@ input[type=number] {
 }
 
 @media screen and (max-width: 700px) {
+  .tab-btn {
+
+    font-size: 18px;
+    line-height: 1.2;
+  }
+  .tab-head {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+  }
   .modal-cont {
     padding: 30px 20px;
     border-radius: 15px;
@@ -7965,12 +8015,13 @@ input[type=number] {
     }
   }
   .product-compound__table ul li {
-    padding: 15px 25px;
+    padding: 15px 15px;
     font-size: 18px;
     line-height: 1.2;
 
     span {
-      width: 90px;
+      width: 60px;
+      flex-shrink: 0;
     }
   }
   .product-info > ul li {
@@ -8273,6 +8324,13 @@ input[type=number] {
 }
 
 @media screen and (max-width: 600px) {
+  .video-cont {
+    border-radius: 0;
+
+    max-width: 93%;
+    padding-top: 140%;
+
+  }
   .burger {
     transform: scale(0.6);
     margin-right: -12px;
@@ -8576,7 +8634,12 @@ input[type=number] {
 @media screen and (max-width: 525px) {
   .about-hero .about-company {
     min-height: 0;
-    padding-bottom: 260px;
+    padding-bottom: 120px;
+  }
+  .about-hero .about-company {
+    .about-company__top .text > span {
+      margin-top: 100px;
+    }
   }
   .about-hero__bg {
     .trigger-b {

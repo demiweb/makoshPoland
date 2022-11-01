@@ -515,19 +515,57 @@ function controlCall() {
     }
 }
 
+var tabBtn = [...document.querySelectorAll('.tab-btn')];
+
+function changeTab() {
+    if (!tabBtn.length) {
+
+    } else {
+        tabBtn.forEach((btn, k) => {
+            btn.addEventListener('click', () => {
+                if (btn.classList.contains('active')) {
+
+                } else {
+                    tabBtn.forEach((btn2) => {
+                        btn2.classList.remove('active');
+                    });
+                    btn.classList.add('active');
+                    [...document.querySelectorAll('.item-tab')].forEach((tab, m) => {
+                        if (m === k) {
+                            tab.classList.add('active');
+                        } else {
+                            tab.classList.remove('active');
+
+                        }
+                    })
+                }
+            })
+        })
+    }
+}
+
+changeTab();
+
+
+
 function modalsControl() {
     if (backplate.length) {
         backplate.forEach((btn) => {
             btn.addEventListener('click', () => {
                 btn.closest('.modal-window').classList.remove('visible');
                 document.body.classList.remove('no-scroll');
-
+                if (btn.closest('.modal-window').classList.contains('video-modal')) {
+                    btn.closest('.modal-window').querySelector('video').src = '';
+                }
             })
         });
         closeModal.forEach((btn) => {
             btn.addEventListener('click', () => {
                 btn.closest('.modal-window').classList.remove('visible');
                 document.body.classList.remove('no-scroll');
+                if (btn.closest('.modal-window').classList.contains('video-modal')) {
+                    btn.closest('.modal-window').querySelector('video').src = '';
+                }
 
             })
         })
